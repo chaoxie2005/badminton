@@ -1,0 +1,15 @@
+/* ==================== 页面骨架 ==================== */
+.container {
+  padding: 32rpx 24rpx;
+  animation: pageFade 0.3s ease both;
+}
+
+/* 标题强调 */
+.empty-title {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.empty-desc {
+  letter-spacing: 1rpx;
+}

@@ -1,0 +1,138 @@
+/* ==================== 筛选 Tab ==================== */
+.filter-tabs {
+  display: flex;
+  margin-bottom: 32rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-pill);
+  padding: 8rpx;
+  box-shadow: var(--shadow-sm);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 16rpx 0;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.25s ease;
+}
+
+.tab:active {
+  transform: scale(0.96);
+}
+
+.tab.active {
+  background: var(--brand);
+  color: var(--text-inverse) !important;
+  font-weight: 600;
+  box-shadow: 0 4rpx 12rpx rgba(0, 181, 120, 0.25);
+}
+
+/* ==================== 记分牌卡片 ==================== */
+.scoreboard-item {
+  cursor: pointer;
+  animation: cardSlide 0.3s ease both;
+}
+
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.board-name {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.board-status {
+  font-size: var(--font-size-xs);
+  padding: 6rpx 20rpx;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.board-status.ongoing {
+  background: var(--brand-light);
+  color: var(--brand-dark);
+}
+
+.board-status.finished {
+  background: #f5f5f5;
+  color: var(--text-secondary);
+}
+
+/* ==================== 比分行 ==================== */
+.board-score-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.player-name {
+  font-size: var(--font-size-md);
+  flex: 2;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.score-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+}
+
+.score-num {
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  color: var(--brand);
+  min-width: 72rpx;
+  text-align: center;
+  transition: color 0.3s;
+}
+
+.score-colon {
+  font-size: 48rpx;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* ==================== 卡片统计 ==================== */
+.board-cards {
+  display: flex;
+  gap: 24rpx;
+  font-size: var(--font-size-sm);
+  margin-top: 16rpx;
+  padding: 12rpx 0;
+}
+
+.board-time {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: 12rpx;
+}
+
+/* ==================== 加载与空状态 ==================== */
+.loading-more,
+.no-more {
+  text-align: center;
+  padding: 32rpx 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}

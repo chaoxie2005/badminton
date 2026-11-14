@@ -1,0 +1,60 @@
+<view class="container">
+  <view class="card">
+    <!-- 头像 -->
+    <view class="section-title">头像</view>
+    <view class="avatar-section" bindtap="chooseAvatar">
+      <image wx:if="{{avatarUrl}}" class="edit-avatar" src="{{avatarUrl}}" mode="aspectFill" />
+      <view wx:else class="edit-avatar placeholder">🏸</view>
+      <view class="avatar-tip">{{uploading ? '上传中...' : '点击更换头像'}}</view>
+    </view>
+
+    <!-- 基础信息 -->
+    <view class="section-title">基础信息</view>
+    <view class="fg">
+      <text class="lb">昵称 <text class="required">*</text></text>
+      <input class="in" value="{{nickName}}" bindinput="onNameInput" maxlength="20" placeholder="请输入昵称" />
+    </view>
+    <view class="fg">
+      <text class="lb">性别</text>
+      <picker mode="selector" range="{{genders}}" value="{{genderIndex}}" bindchange="onGenderChange">
+        <view class="pk">{{genders[genderIndex]}}</view>
+      </picker>
+    </view>
+    <view class="fg">
+      <text class="lb">年龄</text>
+      <picker mode="selector" range="{{ages}}" value="{{ageIndex}}" bindchange="onAgeChange">
+        <view class="pk">{{ages[ageIndex]}}</view>
+      </picker>
+    </view>
+    <view class="fg">
+      <text class="lb">城市</text>
+      <input class="in" value="{{city}}" bindinput="onCityInput" maxlength="20" placeholder="所在城市" />
+    </view>
+
+    <!-- 羽毛球信息 -->
+    <view class="section-title">羽毛球信息</view>
+    <view class="fg">
+      <text class="lb">水平</text>
+      <picker mode="selector" range="{{levels}}" value="{{levelIndex}}" bindchange="onLevelChange">
+        <view class="pk">{{levels[levelIndex] || '请选择水平'}}</view>
+      </picker>
+    </view>
+    <view class="fg">
+      <text class="lb">打法偏好</text>
+      <picker mode="selector" range="{{styles}}" value="{{styleIndex}}" bindchange="onStyleChange">
+        <view class="pk">{{styles[styleIndex] || '都可以'}}</view>
+      </picker>
+    </view>
+    <view class="fg">
+      <text class="lb">常出没球馆</text>
+      <input class="in" value="{{homeCourt}}" bindinput="onCourtInput" maxlength="50" placeholder="常去的球馆名称" />
+    </view>
+
+    <!-- 个人简介 -->
+    <view class="section-title">个人简介</view>
+    <view class="fg">
+      <textarea class="ta" value="{{bio}}" bindinput="onBioInput" maxlength="100" placeholder="介绍一下自己，让球友更了解你..." />
+    </view>
+  </view>
+  <button class="btn-primary btn-full" bindtap="save" loading="{{saving}}" disabled="{{saving || uploading}}">保存</button>
+</view>

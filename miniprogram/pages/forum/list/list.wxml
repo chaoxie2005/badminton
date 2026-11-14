@@ -1,0 +1,66 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input
+      class="search-input"
+      placeholder="搜索论坛..."
+      value="{{keyword}}"
+      bindinput="onSearchInput"
+      confirm-type="search"
+      bindconfirm="onSearch"
+    />
+    <view class="search-btn" bindtap="onSearch">搜索</view>
+  </view>
+
+  <!-- 论坛列表 -->
+  <view wx:if="{{forums.length > 0}}">
+    <view
+      wx:for="{{forums}}"
+      wx:key="_id"
+      class="card forum-item"
+    >
+      <view class="forum-main" data-id="{{item._id}}" bindtap="goForum">
+        <view class="forum-cover" wx:if="{{item.coverImage}}">
+          <image src="{{item.coverImage}}" mode="aspectFill" />
+        </view>
+        <view class="forum-cover-placeholder" wx:else>
+          <text>🏸</text>
+        </view>
+        <view class="forum-info">
+          <text class="forum-name">{{item.name}}</text>
+          <text class="forum-desc" wx:if="{{item.description}}">{{item.description}}</text>
+          <view class="forum-meta">
+            <text class="forum-members">{{item.memberCount || 0}} 成员</text>
+            <view class="forum-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+              <text wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag" class="tag">{{tag}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="forum-action">
+        <button
+          class="join-btn {{joinedForums[item._id] ? 'joined' : ''}}"
+          size="mini"
+          data-id="{{item._id}}"
+          data-joined="{{joinedForums[item._id]}}"
+          bindtap="toggleJoin"
+        >{{joinedForums[item._id] ? '已加入' : '加入'}}</button>
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading-more">加载中...</view>
+    <view wx:elif="{{!hasMore}}" class="no-more">— 没有更多了 —</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <text class="empty-emoji">💬</text>
+    <text class="empty-title">还没有论坛</text>
+    <text class="empty-desc">点击下方按钮创建第一个论坛</text>
+  </view>
+
+  <!-- FAB -->
+  <view class="fab" bindtap="goCreateForum">
+    <text class="fab-text">+</text>
+  </view>
+</view>

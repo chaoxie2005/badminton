@@ -1,0 +1,23 @@
+<view class="container">
+  <block wx:if="{{loading}}">
+    <view class="loading">加载中...</view>
+  </block>
+  <block wx:elif="{{article}}">
+    <image wx:if="{{article.coverImage}}" class="cover" src="{{article.coverImage}}" mode="aspectFill" />
+    <view class="content">
+      <text class="title">{{article.title}}</text>
+      <view class="meta">
+        <text class="category">{{article.category}}</text>
+        <text class="views">{{article.viewCount || 0}} 次阅读</text>
+        <text class="source" wx:if="{{article.source}}">来源：{{article.source}}</text>
+      </view>
+      <view class="body">
+        <rich-text nodes="{{article.content}}" wx:if="{{article.content}}" />
+        <text wx:else class="no-content">暂无内容</text>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="error">文章不存在或已被删除</view>
+  </block>
+</view>

@@ -1,0 +1,46 @@
+<view class="container">
+  <!-- 分类筛选 -->
+  <scroll-view class="category-bar" scroll-x>
+    <view class="categories">
+      <view
+        wx:for="{{categories}}"
+        wx:key="*this"
+        class="cat-item {{activeCategory === item ? 'active' : ''}}"
+        bindtap="switchCategory"
+        data-category="{{item}}"
+      >{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <!-- 文章列表 -->
+  <view class="article-list">
+    <block wx:for="{{articles}}" wx:key="_id">
+      <view class="article-card card" bindtap="goDetail" data-id="{{item._id}}">
+        <image wx:if="{{item.coverImage}}" class="cover" src="{{item.coverImage}}" mode="aspectFill" />
+        <view wx:else class="cover placeholder">📖</view>
+        <view class="article-info">
+          <text class="title">{{item.title}}</text>
+          <text class="category-tag">{{item.category}}</text>
+          <view class="meta">
+            <text class="views">{{item.viewCount || 0}} 次阅读</text>
+            <text class="source" wx:if="{{item.source}}">来源：{{item.source}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{!loading && articles.length === 0}}">
+      <text class="empty-icon">📖</text>
+      <text class="empty-text">暂无文章</text>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="load-more" wx:if="{{loading}}">
+      <text>正在加载...</text>
+    </view>
+    <view class="load-more" wx:elif="{{!hasMore && articles.length > 0}}">
+      <text class="no-more">— 没有更多了 —</text>
+    </view>
+  </view>
+</view>

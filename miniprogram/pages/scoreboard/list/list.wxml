@@ -1,0 +1,77 @@
+<view class="container">
+  <!-- 筛选 tab -->
+  <view class="filter-tabs">
+    <view
+      class="tab {{filter === 'all' ? 'active' : ''}}"
+      data-filter="all"
+      bindtap="setFilter"
+    >全部</view>
+    <view
+      class="tab {{filter === 'ongoing' ? 'active' : ''}}"
+      data-filter="ongoing"
+      bindtap="setFilter"
+    >进行中</view>
+    <view
+      class="tab {{filter === 'finished' ? 'active' : ''}}"
+      data-filter="finished"
+      bindtap="setFilter"
+    >已结束</view>
+  </view>
+
+  <!-- 列表 -->
+  <view wx:if="{{boards.length > 0}}">
+    <view
+      wx:for="{{boards}}"
+      wx:key="_id"
+      class="card scoreboard-item"
+      data-id="{{item._id}}"
+      bindtap="goDetail"
+      bindlongpress="deleteBoard"
+    >
+      <view class="board-header">
+        <text class="board-name">{{item.name || '未命名比赛'}}</text>
+        <text class="board-status {{item.status}}">
+          {{item.status === 'ongoing' ? '进行中' : '已结束'}}
+        </text>
+      </view>
+
+      <view class="board-score-line">
+        <text class="player-name">{{item.playerA}}</text>
+        <view class="score-display">
+          <text class="score-num">{{item.scoreA}}</text>
+          <text class="score-colon">:</text>
+          <text class="score-num">{{item.scoreB}}</text>
+        </view>
+        <text class="player-name">{{item.playerB}}</text>
+      </view>
+
+      <view class="board-cards" wx:if="{{item.yellowCardsA > 0 || item.yellowCardsB > 0 || item.redCardsA > 0 || item.redCardsB > 0}}">
+        <text wx:if="{{item.yellowCardsA > 0 || item.yellowCardsB > 0}}">
+          🟨 {{item.yellowCardsA + item.yellowCardsB}}
+        </text>
+        <text wx:if="{{item.redCardsA > 0 || item.redCardsB > 0}}">
+          🟥 {{item.redCardsA + item.redCardsB}}
+        </text>
+      </view>
+
+      <view class="board-time">
+        {{item.updatedAt}}
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading-more">加载中...</view>
+    <view wx:elif="{{!hasMore}}" class="no-more">— 没有更多了 —</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <text class="empty-emoji">🏸</text>
+    <text class="empty-title">还没有记分牌</text>
+    <text class="empty-desc">点击下方按钮创建第一个记分牌</text>
+  </view>
+
+  <!-- FAB 新建按钮 -->
+  <view class="fab" bindtap="goCreate">
+    <text class="fab-text">+</text>
+  </view>
+</view>

@@ -1,0 +1,149 @@
+<view wx:if="{{loading}}" class="loading">加载中...</view>
+
+<block wx:elif="{{board}}">
+  <view class="page">
+    <!-- 顶部标题 -->
+    <view class="top-bar">
+      <text class="match-title">{{board.name}}</text>
+      <text class="status-tag {{board.status}}">{{board.status === 'ongoing' ? 'LIVE' : 'END'}}</text>
+    </view>
+
+    <!-- 比分主区域 -->
+    <view class="score-main">
+      <view class="side player-a">
+        <text class="player-big">{{board.playerA}}</text>
+        <view class="card-row">
+          <text class="card-icon {{board.yellowCardsA > 0 ? 'on' : ''}}" data-player="A" data-card-type="yellow" bindtap="toggleCard">🟨 黄牌 ×{{board.yellowCardsA}}</text>
+          <text class="card-icon {{board.redCardsA > 0 ? 'on' : ''}}" data-player="A" data-card-type="red" bindtap="toggleCard">🟥 红牌 ×{{board.redCardsA}}</text>
+        </view>
+      </view>
+
+      <view class="score-box">
+        <text class="big-score">{{board.scoreA}}</text>
+        <text class="colon">:</text>
+        <text class="big-score">{{board.scoreB}}</text>
+      </view>
+
+      <view class="side player-b">
+        <text class="player-big">{{board.playerB}}</text>
+        <view class="card-row">
+          <text class="card-icon {{board.yellowCardsB > 0 ? 'on' : ''}}" data-player="B" data-card-type="yellow" bindtap="toggleCard">🟨 黄牌 ×{{board.yellowCardsB}}</text>
+          <text class="card-icon {{board.redCardsB > 0 ? 'on' : ''}}" data-player="B" data-card-type="red" bindtap="toggleCard">🟥 红牌 ×{{board.redCardsB}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 比赛结束摘要 -->
+    <view wx:if="{{board.status === 'finished' && board.winner}}" class="finish-summary">
+      <view class="winner-banner">
+        <text class="trophy">🏆</text>
+        <text class="winner-text" wx:if="{{board.winner !== '平局'}}">{{board.winner}} 获胜！</text>
+        <text class="winner-text" wx:else>双方打平</text>
+      </view>
+      <view class="finish-stats">
+        <view class="fs-item">
+          <text class="fs-label">最终比分</text>
+          <text class="fs-value">{{board.scoreA}} : {{board.scoreB}}</text>
+        </view>
+        <view class="fs-item">
+          <text class="fs-label">比赛时长</text>
+          <text class="fs-value">{{board.durationText || '--'}}</text>
+        </view>
+        <view wx:if="{{board.totalCards > 0}}" class="fs-item">
+          <text class="fs-label">红黄牌</text>
+          <text class="fs-value">🟨 {{board.yellowCardsA + board.yellowCardsB}}  🟥 {{board.redCardsA + board.redCardsB}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- VS 分隔线 -->
+    <view class="divider">
+      <view class="line"></view>
+      <text class="vs">VS</text>
+      <view class="line"></view>
+    </view>
+
+    <!-- 计分按钮 -->
+    <view wx:if="{{board.status === 'ongoing'}}" class="btn-area">
+      <view class="btn-group">
+        <text class="btn-label">{{board.playerA}}</text>
+        <view class="btn-row">
+          <view class="sc-btn minus" data-player="A" data-delta="{{-1}}" bindtap="changeScore">−1</view>
+          <view class="sc-btn plus" data-player="A" data-delta="{{1}}" bindtap="changeScore">+1</view>
+        </view>
+      </view>
+      <view class="btn-group">
+        <text class="btn-label">{{board.playerB}}</text>
+        <view class="btn-row">
+          <view class="sc-btn minus" data-player="B" data-delta="{{-1}}" bindtap="changeScore">−1</view>
+          <view class="sc-btn plus" data-player="B" data-delta="{{1}}" bindtap="changeScore">+1</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="bottom-actions" wx:if="{{board.status === 'ongoing'}}">
+      <view class="action-btn" bindtap="undo">
+        <text>↩ 撤回</text>
+      </view>
+      <view class="action-btn danger" bindtap="finishGame">
+        <text>🏁 结束</text>
+      </view>
+    </view>
+
+    <!-- 编辑 -->
+    <view class="edit-link" bindtap="editBoard">
+      <text>✏️ 编辑比赛信息</text>
+    </view>
+
+    <!-- 计分历史 -->
+    <view class="history-section" wx:if="{{board.scoreHistory && board.scoreHistory.length > 0}}">
+      <view class="history-title">📋 计分记录</view>
+      <view class="history-list">
+        <view
+          wx:for="{{board.scoreHistory}}"
+          wx:for-index="idx"
+          wx:key="idx"
+          class="history-item"
+        >
+          <text class="hi-time">{{item.time}}</text>
+          <block wx:if="{{item.action === 'score'}}">
+            <text class="hi-action">{{item.player === 'A' ? board.playerA : board.playerB}}</text>
+            <text class="hi-detail {{item.to > item.from ? 'up' : 'down'}}">
+              {{item.from}} → {{item.to}}
+              <text wx:if="{{item.to > item.from}}">+{{item.to - item.from}}</text>
+              <text wx:else>{{item.to - item.from}}</text>
+            </text>
+          </block>
+          <block wx:elif="{{item.action === 'yellowCard'}}">
+            <text class="hi-action">{{item.player === 'A' ? board.playerA : board.playerB}}</text>
+            <text class="hi-detail card-yellow">🟨 黄牌 ×{{item.to}}</text>
+          </block>
+          <block wx:elif="{{item.action === 'redCard'}}">
+            <text class="hi-action">{{item.player === 'A' ? board.playerA : board.playerB}}</text>
+            <text class="hi-detail card-red">🟥 红牌 ×{{item.to}}</text>
+          </block>
+          <block wx:elif="{{item.action === 'finish'}}">
+            <text class="hi-action">比赛结束</text>
+            <text class="hi-detail finish-entry">🏁 {{board.scoreA}}:{{board.scoreB}}</text>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 时间 -->
+    <view class="time-text">
+      <text>创建于 {{board.createdAt}}</text>
+      <text wx:if="{{board.status === 'finished' && board.finishedAt}}"> ｜ 结束于 {{board.finishedAt}}</text>
+    </view>
+  </view>
+
+  <!-- 全屏示牌动画 -->
+  <view class="card-overlay {{showCard ? 'show' : ''}}" wx:if="{{showCard}}">
+    <view class="card-popup {{cardType}}">
+      <text class="card-emoji">{{cardType === 'yellow' ? '🟨' : '🟥'}}</text>
+      <text class="card-label">{{cardType === 'yellow' ? '黄牌' : '红牌'}}</text>
+      <text class="card-player-name">{{cardPlayer === 'A' ? board.playerA : board.playerB}}</text>
+    </view>
+  </view>
+</block>

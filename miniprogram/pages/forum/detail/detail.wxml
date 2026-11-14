@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 论坛头信息 -->
+  <view class="card forum-header" wx:if="{{forum}}">
+    <view class="forum-header-top">
+      <view class="forum-cover" wx:if="{{forum.coverImage}}">
+        <image src="{{forum.coverImage}}" mode="aspectFill" />
+      </view>
+      <view class="forum-cover-placeholder" wx:else>
+        <text>🏸</text>
+      </view>
+      <view class="forum-info">
+        <text class="forum-name">{{forum.name}}</text>
+        <text class="forum-desc" wx:if="{{forum.description}}">{{forum.description}}</text>
+        <text class="forum-members">{{forum.memberCount || 0}} 成员</text>
+      </view>
+    </view>
+    <view class="join-action">
+      <button
+        class="join-btn {{joined ? 'joined' : ''}}"
+        size="mini"
+        bindtap="toggleJoin"
+      >{{joined ? '已加入' : '加入论坛'}}</button>
+    </view>
+  </view>
+
+  <!-- 帖子列表 -->
+  <view wx:if="{{posts.length > 0}}">
+    <view
+      wx:for="{{posts}}"
+      wx:key="_id"
+      class="card post-item"
+      data-id="{{item._id}}"
+      bindtap="goPost"
+    >
+      <view class="post-author">
+        <image class="avatar" src="{{item.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill" />
+        <view class="author-info">
+          <text class="author-name">{{item.nickName || '球友'}}</text>
+          <text class="post-time">{{item.createdAt}}</text>
+        </view>
+      </view>
+      <text class="post-title">{{item.title}}</text>
+      <text class="post-content">{{item.content}}</text>
+      <view class="post-images" wx:if="{{item.images && item.images.length > 0}}">
+        <image
+          wx:for="{{item.images}}"
+          wx:key="*this"
+          wx:for-item="img"
+          src="{{img}}"
+          mode="aspectFill"
+          class="post-image"
+        />
+      </view>
+      <view class="post-actions">
+        <view class="action-item" data-id="{{item._id}}" catchtap="toggleLike">
+          <text class="{{item._liked ? 'liked' : ''}}">{{item._liked ? '❤️' : '🤍'}} {{item.likeCount || 0}}</text>
+        </view>
+        <view class="action-item">
+          <text>💬 {{item.commentCount || 0}}</text>
+        </view>
+        <view
+          class="action-item"
+          wx:if="{{item.openid === currentOpenid}}"
+          data-id="{{item._id}}"
+          catchtap="deletePost"
+        >
+          <text>🗑️</text>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" class="loading-more">加载中...</view>
+    <view wx:elif="{{!hasMore}}" class="no-more">— 没有更多了 —</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <text class="empty-emoji">📝</text>
+    <text class="empty-title">还没有帖子</text>
+    <text class="empty-desc">加入论坛后发第一个帖子吧</text>
+  </view>
+
+  <!-- FAB -->
+  <view wx:if="{{joined}}" class="fab" bindtap="goCreatePost">
+    <text class="fab-text">+</text>
+  </view>
+</view>

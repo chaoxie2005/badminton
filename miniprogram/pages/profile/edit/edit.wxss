@@ -1,0 +1,131 @@
+/* 个人资料编辑页 - 使用统一设计令牌 */
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24rpx 0;
+}
+
+.avatar-section:active {
+  opacity: 0.8;
+}
+
+.edit-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+.edit-avatar.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  background: var(--brand-light);
+}
+
+.avatar-tip {
+  font-size: var(--font-size-sm);
+  color: var(--brand);
+  margin-top: 12rpx;
+}
+
+.section-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text);
+  padding-left: 20rpx;
+  border-left: 8rpx solid var(--brand);
+  line-height: 1.4;
+  padding-top: 24rpx;
+  padding-bottom: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.section-title:first-child {
+  padding-top: 0;
+}
+
+.fg {
+  margin-bottom: 28rpx;
+}
+
+.lb {
+  display: block;
+  font-size: var(--font-size-base);
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 10rpx;
+}
+
+.required {
+  color: var(--red);
+}
+
+.in {
+  width: 100%;
+  height: 88rpx;
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0 24rpx;
+  font-size: var(--font-size-md);
+  box-sizing: border-box;
+  background: var(--bg-card);
+  color: var(--text);
+}
+
+.in:focus {
+  border-color: var(--brand);
+}
+
+.pk {
+  width: 100%;
+  height: 88rpx;
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0 24rpx;
+  font-size: var(--font-size-md);
+  line-height: 88rpx;
+  box-sizing: border-box;
+  color: var(--text);
+  background: var(--bg-card);
+}
+
+.ta {
+  width: 100%;
+  height: 160rpx;
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20rpx 24rpx;
+  font-size: var(--font-size-base);
+  box-sizing: border-box;
+  background: var(--bg-card);
+  color: var(--text);
+}
+
+.ta:focus {
+  border-color: var(--brand);
+}
+
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 88rpx;
+  background: var(--brand);
+  color: #fff;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  box-shadow: 0 8rpx 20rpx rgba(0, 181, 120, 0.3);
+}
+
+.btn-primary:active {
+  opacity: 0.9;
+}
+
+.btn-full {
+  width: 100%;
+  text-align: center;
+}

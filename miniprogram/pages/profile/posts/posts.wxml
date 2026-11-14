@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="post-list">
+    <block wx:for="{{posts}}" wx:key="_id">
+      <view class="post-card card" bindtap="goDetail" data-id="{{item._id}}" bindlongpress="deletePost">
+        <view class="post-header">
+          <text class="post-title">{{item.title || '无标题'}}</text>
+          <text class="post-time">{{item.createdAt}}</text>
+        </view>
+        <text class="post-content">{{item.content || ''}}</text>
+        <view class="post-footer">
+          <text wx:if="{{item.likeCount}}">{{item.likeCount}} 赞</text>
+          <text wx:if="{{item.commentCount}}">{{item.commentCount}} 评论</text>
+        </view>
+      </view>
+    </block>
+
+    <view class="empty" wx:if="{{!loading && posts.length === 0}}">
+      <text class="empty-icon">📝</text>
+      <text class="empty-text">还没有发过帖子</text>
+      <text class="empty-hint">去论坛发布你的第一个帖子吧</text>
+    </view>
+
+    <view class="load-more" wx:if="{{loading}}">
+      <text>正在加载...</text>
+    </view>
+    <view class="load-more" wx:elif="{{!hasMore && posts.length > 0}}">
+      <text class="no-more">— 没有更多了 —</text>
+    </view>
+  </view>
+</view>

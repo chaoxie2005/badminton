@@ -1,0 +1,474 @@
+/* ==================== 页面骨架 ==================== */
+.page {
+  padding: 24rpx;
+  animation: pageFade 0.3s ease both;
+}
+
+.loading {
+  text-align: center;
+  padding: 200rpx 0;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+}
+
+/* ==================== 顶部标题 ==================== */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.match-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text);
+}
+
+.status-tag {
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  padding: 6rpx 24rpx;
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-secondary);
+}
+.status-tag.ongoing {
+  background: var(--brand-light);
+  color: var(--brand);
+  box-shadow: inset 0 0 0 1rpx rgba(0, 181, 120, 0.25);
+}
+.status-tag.finished {
+  background: var(--bg);
+  color: var(--text-secondary);
+}
+
+/* ==================== 比分主区域 ==================== */
+.score-main {
+  display: flex;
+  align-items: center;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 40rpx 24rpx;
+  box-shadow: var(--shadow-sm);
+  animation: cardSlide 0.3s ease both;
+}
+
+.side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  min-width: 0;
+}
+
+.player-big {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  max-width: 160rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-row {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 8rpx;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-icon {
+  font-size: var(--font-size-xs);
+  padding: 6rpx 14rpx;
+  border-radius: var(--radius-sm);
+  border: 2rpx solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+}
+.card-icon.on {
+  background: var(--brand-light);
+  border-color: var(--brand);
+  color: var(--brand-dark);
+  font-weight: 700;
+}
+
+.score-box {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 0 16rpx;
+}
+
+.big-score {
+  font-size: 88rpx;
+  font-weight: 700;
+  color: var(--brand);
+  min-width: 80rpx;
+  text-align: center;
+  line-height: 1;
+  text-shadow: 0 4rpx 12rpx rgba(0, 181, 120, 0.15);
+}
+
+.colon {
+  font-size: 56rpx;
+  color: var(--border-strong);
+}
+
+/* ==================== VS 分隔 ==================== */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 32rpx 0;
+  gap: 16rpx;
+}
+
+.line {
+  flex: 1;
+  height: 2rpx;
+  border-radius: 2rpx;
+  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+}
+
+.vs {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+/* ==================== 计分按钮 ==================== */
+.btn-area {
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 32rpx;
+}
+
+.btn-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 28rpx 16rpx;
+  box-shadow: var(--shadow-sm);
+  animation: cardSlide 0.3s ease both;
+}
+.btn-group:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.btn-label {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  max-width: 160rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-row {
+  display: flex;
+  gap: 28rpx;
+}
+
+.sc-btn {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.sc-btn.plus {
+  background: var(--brand);
+  color: var(--white);
+  box-shadow: 0 8rpx 20rpx rgba(0, 181, 120, 0.35);
+}
+.sc-btn.minus {
+  background: var(--bg-card);
+  color: var(--red);
+  border: 2rpx solid var(--red);
+  box-shadow: var(--shadow-sm);
+}
+.sc-btn.plus:active {
+  box-shadow: 0 4rpx 12rpx rgba(0, 181, 120, 0.25);
+}
+.sc-btn:active {
+  transform: scale(0.88);
+  opacity: 0.85;
+}
+
+/* ==================== 底部操作 ==================== */
+.bottom-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.action-btn {
+  flex: 1;
+  text-align: center;
+  padding: 24rpx 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.action-btn.danger {
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 6rpx 16rpx rgba(231, 76, 60, 0.28);
+}
+.action-btn:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+  box-shadow: var(--shadow-md);
+}
+
+.edit-link {
+  text-align: center;
+  padding: 20rpx;
+  color: var(--brand);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.edit-link:active {
+  opacity: 0.6;
+  transform: scale(0.98);
+}
+
+.time-text {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  margin-top: 16rpx;
+}
+
+/* ==================== 比赛结束摘要 ==================== */
+.finish-summary {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+  border-radius: var(--radius-lg);
+  padding: 40rpx 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 12rpx 24rpx rgba(0, 181, 120, 0.25);
+  animation: cardSlide 0.3s ease both;
+}
+
+.winner-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28rpx;
+}
+
+.trophy {
+  font-size: 100rpx;
+  line-height: 1;
+}
+
+.winner-text {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--white);
+  margin-top: 12rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.12);
+}
+
+.finish-stats {
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-md);
+  padding: 20rpx 12rpx;
+}
+
+.fs-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  min-width: 140rpx;
+}
+
+.fs-label {
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.fs-value {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* ==================== 计分历史 ==================== */
+.history-section {
+  margin-top: 32rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 24rpx;
+  box-shadow: var(--shadow-sm);
+  animation: cardSlide 0.3s ease both;
+}
+
+.history-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8rpx;
+  padding: 16rpx 0 16rpx 24rpx;
+  border-bottom: 1rpx solid var(--border);
+  position: relative;
+}
+.history-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 30rpx;
+  background: var(--brand);
+  border-radius: var(--radius-pill);
+}
+
+.history-list {
+  max-height: 480rpx;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx 8rpx;
+  border-bottom: 1rpx solid var(--border);
+  font-size: var(--font-size-sm);
+}
+
+.hi-time {
+  color: var(--text-secondary);
+  font-size: var(--font-size-xs);
+  min-width: 140rpx;
+}
+
+.hi-action {
+  font-weight: 700;
+  min-width: 120rpx;
+  color: var(--text);
+}
+
+.hi-detail {
+  font-weight: 700;
+  color: var(--text);
+}
+.hi-detail.up {
+  color: var(--brand);
+}
+.hi-detail.down {
+  color: var(--red);
+}
+.hi-detail.card-yellow {
+  color: #C79100;
+  background: #FFF8E1;
+  padding: 4rpx 14rpx;
+  border-radius: var(--radius-pill);
+}
+.hi-detail.card-red {
+  color: var(--red);
+  background: #FFEBEB;
+  padding: 4rpx 14rpx;
+  border-radius: var(--radius-pill);
+}
+.hi-detail.finish-entry {
+  color: var(--brand);
+  background: var(--brand-light);
+  padding: 4rpx 14rpx;
+  border-radius: var(--radius-pill);
+}
+
+/* ==================== 全屏示牌层 ==================== */
+.card-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.card-popup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 72rpx 96rpx;
+  border-radius: var(--radius-lg);
+  animation: cardPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card-popup.yellow {
+  background: #FFF8E1;
+  border: 6rpx solid var(--yellow);
+  box-shadow: 0 12rpx 40rpx rgba(243, 156, 18, 0.35);
+}
+.card-popup.red {
+  background: #FFF2F0;
+  border: 6rpx solid var(--red);
+  box-shadow: 0 12rpx 40rpx rgba(231, 76, 60, 0.35);
+}
+
+.card-emoji {
+  font-size: 200rpx;
+  line-height: 1;
+}
+
+.card-label {
+  font-size: 56rpx;
+  font-weight: 700;
+  margin-top: 24rpx;
+}
+.card-popup.yellow .card-label {
+  color: #C79100;
+}
+.card-popup.red .card-label {
+  color: var(--red);
+}
+
+.card-player-name {
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  margin-top: 16rpx;
+  font-weight: 600;
+}
+
+/* ==================== 关键帧 ==================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cardPop {
+  from { transform: scale(0.3); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

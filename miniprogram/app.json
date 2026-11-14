@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/forum/list/list",
+    "pages/scoreboard/list/list",
+    "pages/messages/list/list",
+    "pages/profile/index/index",
+    "pages/scoreboard/create/create",
+    "pages/scoreboard/detail/detail",
+    "pages/profile/edit/edit",
+    "pages/profile/boards/boards",
+    "pages/profile/posts/posts",
+    "pages/profile/videos/videos",
+    "pages/injury/list/list",
+    "pages/injury/detail/detail",
+    "pages/forum/detail/detail",
+    "pages/forum/post/post",
+    "pages/forum/create/create"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#00B578",
+    "navigationBarTitleText": "羽毛球社区",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F0F1F5"
+  },
+  "tabBar": {
+    "color": "#8C8C8C",
+    "selectedColor": "#00B578",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/forum/list/list",
+        "text": "论坛"
+      },
+      {
+        "pagePath": "pages/scoreboard/list/list",
+        "text": "记分牌"
+      },
+      {
+        "pagePath": "pages/messages/list/list",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/profile/index/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json"
+}

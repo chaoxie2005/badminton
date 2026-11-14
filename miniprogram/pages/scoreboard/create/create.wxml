@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="card">
+    <view class="form-group">
+      <text class="label">比赛名称</text>
+      <input
+        class="input"
+        placeholder="例如：周五双打友谊赛"
+        value="{{name}}"
+        bindinput="onNameInput"
+        maxlength="20"
+      />
+    </view>
+
+    <view class="form-group">
+      <text class="label">选手 A</text>
+      <input
+        class="input"
+        placeholder="请输入名称"
+        value="{{playerA}}"
+        bindinput="onPlayerAInput"
+        maxlength="10"
+      />
+    </view>
+
+    <view class="vs-divider">
+      <text class="vs-text">VS</text>
+    </view>
+
+    <view class="form-group">
+      <text class="label">选手 B</text>
+      <input
+        class="input"
+        placeholder="请输入名称"
+        value="{{playerB}}"
+        bindinput="onPlayerBInput"
+        maxlength="10"
+      />
+    </view>
+  </view>
+
+  <button class="btn-primary save-btn" bindtap="save" loading="{{saving}}" disabled="{{saving}}">
+    {{isEdit ? '保存修改' : '创建记分牌'}}
+  </button>
+</view>

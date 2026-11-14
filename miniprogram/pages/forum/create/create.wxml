@@ -1,0 +1,58 @@
+<view class="container">
+  <!-- 标题 -->
+  <view class="form-group">
+    <input
+      class="title-input"
+      placeholder="输入标题..."
+      value="{{title}}"
+      bindinput="onTitleInput"
+      maxlength="100"
+    />
+  </view>
+
+  <!-- 内容 -->
+  <view class="form-group">
+    <textarea
+      class="content-input"
+      placeholder="分享你的羽毛球故事..."
+      value="{{content}}"
+      bindinput="onContentInput"
+      maxlength="5000"
+      auto-height
+    />
+  </view>
+
+  <!-- 图片选择 -->
+  <view class="form-group">
+    <view class="image-picker">
+      <view
+        wx:for="{{images}}"
+        wx:key="*this"
+        class="image-item"
+      >
+        <image src="{{item}}" mode="aspectFill" />
+        <view class="remove-btn" data-index="{{index}}" catchtap="removeImage">
+          <text>✕</text>
+        </view>
+      </view>
+      <view
+        wx:if="{{images.length < 9}}"
+        class="add-btn"
+        bindtap="chooseImage"
+      >
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <view class="submit-area">
+    <button
+      class="btn-primary submit-btn"
+      bindtap="submit"
+      disabled="{{submitting || uploading}}"
+    >{{submitting ? '发布中...' : '发布帖子'}}</button>
+    <text class="hint">最多9张图片</text>
+  </view>
+</view>

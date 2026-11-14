@@ -1,0 +1,123 @@
+<view class="container">
+  <!-- 加载中 -->
+  <view class="loading-block" wx:if="{{loading}}">
+    <view class="skeleton-avatar"></view>
+    <view class="skeleton-lines">
+      <view class="skeleton-line w60"></view>
+      <view class="skeleton-line w40"></view>
+    </view>
+  </view>
+
+  <!-- 头像区 - 已登录 -->
+  <view class="profile-header card" wx:elif="{{user}}">
+    <view class="user-row" bindtap="goEdit">
+      <image wx:if="{{user.avatarUrl}}" class="avatar" src="{{user.avatarUrl}}" mode="aspectFill" />
+      <view wx:else class="avatar placeholder">🏸</view>
+      <view class="info">
+        <view class="name-row">
+          <text class="nick">{{user.nickName || '球友'}}</text>
+          <text class="gender-tag" wx:if="{{user.gender === 1}}">♂</text>
+          <text class="gender-tag female" wx:elif="{{user.gender === 2}}">♀</text>
+        </view>
+        <view class="meta-row">
+          <text class="level-tag">{{user.badmintonLevel || '未设置水平'}}</text>
+          <text class="style-tag" wx:if="{{user.playingStyle}}">{{user.playingStyle}}</text>
+          <text class="city-tag" wx:if="{{user.city}}">{{user.city}}</text>
+        </view>
+        <text class="bio">{{user.bio || '这个人很懒，什么都没写...'}}</text>
+        <view class="extra-row" wx:if="{{user.homeCourt || user.age}}">
+          <text class="court-info" wx:if="{{user.homeCourt}}">{{user.homeCourt}}</text>
+          <text class="age-info" wx:if="{{user.age}}">{{user.age}}岁</text>
+        </view>
+      </view>
+      <text class="arr">›</text>
+    </view>
+  </view>
+
+  <!-- 头像区 - 未登录 -->
+  <view class="profile-header card" wx:else>
+    <view class="user-row" bindtap="handleLogin">
+      <view class="avatar placeholder">🏸</view>
+      <view class="info">
+        <text class="nick">点击登录</text>
+        <text class="bio">授权微信信息，开启羽毛球之旅</text>
+      </view>
+      <text class="arr">›</text>
+    </view>
+  </view>
+
+  <!-- 统计数据 -->
+  <view class="stats">
+    <view class="stat card" bindtap="goMyBoards">
+      <text class="num">{{boardCount}}</text>
+      <text class="label">记分牌</text>
+    </view>
+    <view class="stat card" bindtap="goMyPosts">
+      <text class="num">{{postCount}}</text>
+      <text class="label">帖子</text>
+    </view>
+    <view class="stat card" bindtap="goMyVideos">
+      <text class="num">{{videoCount}}</text>
+      <text class="label">视频</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu card">
+    <view class="menu-title">功能服务</view>
+    <view class="row" bindtap="goEdit">
+      <view class="row-left">
+        <text class="row-icon">✏️</text>
+        <text>编辑资料</text>
+      </view>
+      <text class="arr">›</text>
+    </view>
+    <view class="row" bindtap="goMyPosts">
+      <view class="row-left">
+        <text class="row-icon">📝</text>
+        <text>我的帖子</text>
+      </view>
+      <text class="arr">›</text>
+    </view>
+    <view class="row" bindtap="goMyVideos">
+      <view class="row-left">
+        <text class="row-icon">🎬</text>
+        <text>我的视频</text>
+      </view>
+      <text class="arr">›</text>
+    </view>
+    <view class="row" bindtap="goInjury">
+      <view class="row-left">
+        <text class="row-icon">📖</text>
+        <text>伤病科普</text>
+      </view>
+      <text class="arr">›</text>
+    </view>
+  </view>
+
+  <!-- 设置菜单 -->
+  <view class="menu card">
+    <view class="menu-title">其他</view>
+    <view class="row" bindtap="clearCache">
+      <view class="row-left">
+        <text class="row-icon">🗑️</text>
+        <text>清除缓存</text>
+      </view>
+      <text class="arr">›</text>
+    </view>
+    <view class="row" bindtap="goAbout">
+      <view class="row-left">
+        <text class="row-icon">ℹ️</text>
+        <text>关于小程序</text>
+      </view>
+      <text class="arr">›</text>
+    </view>
+    <view class="row logout-row" bindtap="logout" wx:if="{{user}}">
+      <text>退出登录</text>
+    </view>
+  </view>
+
+  <view class="footer">
+    <text>羽毛球社区 v1.0.0</text>
+  </view>
+</view>
